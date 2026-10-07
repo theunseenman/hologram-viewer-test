@@ -6,7 +6,7 @@ Bun.serve({
  async fetch(req){
   const u=new URL(req.url); let p=decodeURIComponent(u.pathname);
 
-  if(p==="/reveal-status") return Response.json({revealed},{headers:{"cache-control":"no-store"}});
+  if(p==="/reveal-status") return Response.json({revealed},{headers:{"cache-control":"no-store"}});\n  if(p==="/go-live"){revealed=true;return Response.redirect(new URL("/reveal/1?token=1",u),302);}\n  if(p==="/go-dark"){revealed=false;return Response.redirect(new URL("/reveal/1?token=1",u),302);}
   if(p==="/trigger-reveal"&&req.method==="POST"){revealed=true;return Response.json({revealed:true},{headers:{"cache-control":"no-store"}});}
   if(p==="/reset-reveal"&&req.method==="POST"){revealed=false;return Response.json({revealed:false},{headers:{"cache-control":"no-store"}});}
 
