@@ -1,0 +1,268 @@
+<!-- TOKEN #0001 | v14 preserved | SEEN original + UNSEEN black test -->
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>UNSEEN #0001 — V14 Two Asset Test</title><style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#070808;color:#fff;font-family:Arial,sans-serif}body{display:grid;place-items:center;padding:18px}
+.wrap{width:min(620px,100%)}.meta{display:flex;justify-content:space-between;margin:0 2px 10px;color:#777;font-size:10px;letter-spacing:.18em;text-transform:uppercase}.meta b{color:#ffe900}
+.frame{position:relative;aspect-ratio:1;overflow:hidden;background:#030404;border:1px solid #ffffff20;border-radius:12px;box-shadow:0 30px 90px #000;touch-action:none}
+.frame:after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;border-radius:inherit;box-shadow:inset 0 0 0 1px #ffffff08,inset 0 -60px 100px #0005}
+canvas,.original{position:absolute;inset:0;width:100%;height:100%;display:block}.original{object-fit:cover;z-index:3;opacity:0;transition:opacity .52s ease}.frame.is-seen .original{opacity:1}
+.state{position:absolute;right:9px;top:9px;z-index:7;border:1px solid #ffffff45;border-radius:999px;background:#070808dc;color:#fff;padding:7px 10px;font-size:9px;font-weight:700;letter-spacing:.12em;cursor:pointer;backdrop-filter:blur(6px);-webkit-tap-highlight-color:transparent;outline:none;touch-action:manipulation}
+.state:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#ffe900;margin-right:7px;box-shadow:0 0 9px #ffe900}.frame.is-seen .state{background:#ffe900;color:#080808;border-color:#ffe900}.frame.is-seen .state:before{background:#080808;box-shadow:none}
+.frame,.frame *{-webkit-tap-highlight-color:transparent}.state:focus,.state:focus-visible{outline:none;box-shadow:none}.cue{text-align:center;margin:12px 0 0;color:#777;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+</style><style>
+#resumeShield{position:absolute;inset:0;z-index:7;background:#000;opacity:0;pointer-events:none;transition:opacity .08s linear}
+#resumeShield.on{opacity:1}
+</style>
+</head><body><main class="wrap"><div class="meta"><b>NFT VIEWER TEST</b><span>#0001</span></div>
+<div class="frame" id="frame"><canvas id="holo"></canvas><img class="original" alt="Seen artwork" src="assets/a1.png"><img id="unseenSource" hidden src="assets/a2.png"><button class="state" id="state" aria-label="Switch to seen artwork">UNSEEN</button></div>
+<div id="resumeShield" aria-hidden="true"></div><p class="cue" id="cue">UNSEEN · MOVE YOUR FINGER OR PHONE</p></main>
+<script>window.TOKENS=[null,{seen:"assets/a3.jpg",unseen:"assets/a4.png"},{seen:"assets/a5.jpg",unseen:"assets/a6.png"},{seen:"assets/a7.jpg",unseen:"assets/a8.png"}];(()=>{let n=Math.max(1,Math.min(3,parseInt((location.hash.match(/token-(\d+)/)||[])[1]||new URLSearchParams(location.search).get("token")||"1")||1));window.UNSEEN_TOKEN_ID=n;const p=window.TOKENS[n];document.querySelector("img.original").src=p.seen;document.getElementById("unseenSource").src=p.unseen;document.title="UNSEEN #"+String(n).padStart(4,"0")+" — Hologram Test"})();</script>
+<script>
+(()=>{'use strict';
+const canvas=document.getElementById('holo'),frame=document.getElementById('frame'),state=document.getElementById('state'),cue=document.getElementById('cue'),resumeShield=document.getElementById('resumeShield');
+
+state.addEventListener('click',e=>{
+  e.stopPropagation();
+  const seen=frame.classList.toggle('is-seen');
+  state.textContent=seen?'SEEN':'UNSEEN';
+  state.setAttribute('aria-label',seen?'Switch to unseen hologram':'Switch to seen artwork');
+  cue.textContent=seen?'SEEN · ORIGINAL ARTWORK':'UNSEEN · MOVE YOUR FINGER OR PHONE';
+  if(!seen) ensureLive();
+});
+
+const vs='attribute vec2 p;varying vec2 uv;void main(){uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
+const fs=`precision highp float;
+varying vec2 uv;uniform vec2 m;uniform float t;uniform sampler2D tex;
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+void main(){
+ vec2 tuv=vec2(uv.x,1.-uv.y); vec4 im=texture2D(tex,tuv);
+ float lum=dot(im.rgb,vec3(.299,.587,.114));
+ float chroma=max(im.r,max(im.g,im.b))-min(im.r,min(im.g,im.b));
+ float yellow=smoothstep(.16,.48,im.r-im.b)*smoothstep(.18,.55,im.g-im.b);
+ float dark=smoothstep(.48,.04,lum);
+ float artMask=clamp(dark*.82+yellow+chroma*.45,0.,1.)*im.a;
+
+ /* Three reflections travelling on different axes. */
+ vec2 d1=normalize(vec2(.90,.34));
+ vec2 d2=normalize(vec2(-.48,.88));
+ vec2 d3=normalize(vec2(.22,.98));
+ float a1=dot(uv,d1), a2=dot(uv,d2), a3=dot(uv,d3);
+ float l1=dot(m,d1), l2=dot(m,d2), l3=dot(m,d3);
+ /* Slightly offset each directional catch so they no longer all cross exactly under the fingertip. */
+ float b1=exp(-pow(a1-(l1-.030),2.)/.010);
+ float b2=exp(-pow(a2-(l2+.036),2.)/.0065);
+ float b3=exp(-pow(a3-(l3-.018),2.)/.0048);
+ float c1=exp(-pow(a1-(l1-.030),2.)/.0016);
+ float c2=exp(-pow(a2-(l2+.036),2.)/.00115);
+ float c3=exp(-pow(a3-(l3-.018),2.)/.00085);
+ float reveal=clamp(b1*.72+b2*.48+b3*.36,0.,1.)*artMask;
+
+ vec3 original=im.rgb;
+ vec3 blackLift=mix(vec3(.006),vec3(.115),dark);
+ vec3 baseArt=mix(original,blackLift,dark*.30);
+ vec3 col=vec3(.005,.006,.005);
+ col+=baseArt*reveal*(.78+.24*(b1+b2+b3));
+
+ /* Stronger coloured foil lines, not a coloured wash. */
+ float p1=(a1*10.5 + m.x*.72-m.y*.31)*6.28318;
+ float p2=(a2*12.5 - m.x*.34+m.y*.66)*6.28318;
+ float p3=(a3*15.0 + m.x*.43+m.y*.25)*6.28318;
+ vec3 sp1=.5+.5*cos(p1+vec3(0.,2.094,4.188));
+ vec3 sp2=.5+.5*cos(p2+vec3(4.188,0.,2.094));
+ vec3 sp3=.5+.5*cos(p3+vec3(2.094,4.188,0.));
+ float fine1=pow(.5+.5*sin(a1*150.+m.x*27.),13.);
+ float fine2=pow(.5+.5*sin(a2*132.-m.y*23.),14.);
+ float fine3=pow(.5+.5*sin(a3*178.+(m.x-m.y)*19.),15.);
+ col+=sp1*artMask*(fine1*b1*.30+c1*.22);
+ col+=sp2*artMask*(fine2*b2*.27+c2*.19);
+ col+=sp3*artMask*(fine3*b3*.24+c3*.17);
+
+ /* Clean silver/gold peak catches. */
+ vec2 specPos=vec2(m.x*.88+.06,m.y*.82+.09);
+ float spec=pow(max(0.,1.-distance(uv,specPos)*2.45),14.)*artMask;
+ col+=vec3(.96,.99,1.)*spec*.34;
+ col+=vec3(1.,.89,0.)*yellow*(c1*.22+c2*.16+c3*.14);
+
+ float spark=step(.9976,hash(floor(uv*vec2(330.,440.))+floor(t*1.4)));
+ col+=(sp1+sp2+sp3)/3.*spark*artMask*max(b1,max(b2,b3))*.13;
+ /* Local hologram pool: preserve the exact v9 foil, but only reveal it near the finger/tilt position. */
+ vec2 delta=uv-m;
+
+ /* Organic local foil catch: v9 colour/line system above is untouched.
+    The reveal edge is distorted in several directions so it no longer reads as a circular torch. */
+ float ang=atan(delta.y,delta.x);
+ float directional=
+      sin(ang*3.0 + a1*15.0)*.022
+     +sin(ang*5.0 - a2*12.0)*.014
+     +sin(ang*7.0 + a3*9.0)*.009;
+ float anisotropic=length(vec2(delta.x*.88,delta.y*1.08));
+ float reach=.245 + directional
+     + b1*.035
+     + b2*.026
+     + b3*.020;
+ float localPool=1.-smoothstep(reach*.48,reach,anisotropic);
+
+ /* Let individual holographic bands feather a little beyond the main pool. */
+ float lineReach=1.-smoothstep(reach*.72,reach*1.18,anisotropic);
+ float foilEnergy=clamp(b1*.55+b2*.42+b3*.34,0.,1.);
+ localPool=max(localPool,lineReach*foilEnergy*.58);
+
+ /* Soft irregular centre rather than a perfect hotspot. */
+ float centreWarp=anisotropic + sin(ang*4.0+a2*8.0)*.008;
+ float hot=1.-smoothstep(.025,.105,centreWarp);
+ col*=localPool;
+ col+=vec3(.055,.06,.052)*artMask*hot*.16;
+ gl_FragColor=vec4(pow(clamp(col,0.,1.4),vec3(.88)),1.);
+}`;
+
+let gl=null,prog=null,buf=null,texture=null,img=null,ml=null,tl=null,xl=null,raf=0;
+let mx=.5,my=.5,targetX=.5,targetY=.5,dragStartX=.5,dragStartY=.5,startTargetX=.5,startTargetY=.5;
+let lost=false,generation=0,recovering=false;
+
+function shader(type,src){
+  const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;
+}
+
+function currentUnseen(){
+  const p=window.TOKENS&&window.TOKENS[window.UNSEEN_TOKEN_ID];
+  return p?p.unseen:document.getElementById('unseenSource').src;
+}
+
+function upload(src){
+  if(!gl||lost||!texture)return;
+  const localGeneration=generation;
+  img=new Image();
+  img.onload=()=>{
+    if(!gl||lost||localGeneration!==generation)return;
+    try{
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D,texture);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);
+      gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
+    }catch(_e){}
+  };
+  img.src=src;
+}
+window.__setUnseenTexture=upload;
+
+function resize(){
+  if(!gl||lost)return;
+  const r=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2),w=Math.max(1,Math.round(r.width*d)),hh=Math.max(1,Math.round(r.height*d));
+  if(canvas.width!==w||canvas.height!==hh){canvas.width=w;canvas.height=hh;}
+  gl.viewport(0,0,canvas.width,canvas.height);
+}
+
+function build(){
+  generation++;
+  gl=canvas.getContext('webgl',{antialias:true,alpha:false})||canvas.getContext('experimental-webgl');
+  if(!gl)return false;
+  lost=false;
+  prog=gl.createProgram();
+  gl.attachShader(prog,shader(gl.VERTEX_SHADER,vs));
+  gl.attachShader(prog,shader(gl.FRAGMENT_SHADER,fs));
+  gl.linkProgram(prog);gl.useProgram(prog);
+  buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
+  const loc=gl.getAttribLocation(prog,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  ml=gl.getUniformLocation(prog,'m');tl=gl.getUniformLocation(prog,'t');xl=gl.getUniformLocation(prog,'tex');
+  texture=gl.createTexture();gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+  gl.uniform1i(xl,0);
+  resize();upload(currentUnseen());
+  return true;
+}
+
+function draw(ms){
+  raf=0;
+  if(document.hidden||lost||!gl)return;
+  resize();
+  mx+=(targetX-mx)*.10;my+=(targetY-my)*.10;
+  gl.useProgram(prog);
+  gl.uniform2f(ml,mx,my);gl.uniform1f(tl,ms*.001);
+  gl.drawArrays(gl.TRIANGLES,0,6);
+  if(recovering){recovering=false;requestAnimationFrame(()=>resumeShield.classList.remove('on'));}
+  raf=requestAnimationFrame(draw);
+}
+
+function startLoop(){
+  if(!raf&&!document.hidden&&!lost&&gl)raf=requestAnimationFrame(draw);
+}
+
+function ensureLive(){
+  if(document.hidden)return;
+  recovering=true;resumeShield.classList.add('on');
+  if(!gl){if(build())startLoop();return;}
+  if(gl.isContextLost&&gl.isContextLost()){lost=true;return;}
+  resize();upload(currentUnseen());startLoop();
+}
+
+canvas.addEventListener('webglcontextlost',e=>{
+  e.preventDefault();lost=true;generation++;recovering=true;resumeShield.classList.add('on');
+  if(raf)cancelAnimationFrame(raf);raf=0;
+},false);
+
+canvas.addEventListener('webglcontextrestored',()=>{
+  gl=null;prog=null;buf=null;texture=null;ml=null;tl=null;xl=null;
+  build();startLoop();
+},false);
+
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){if(raf)cancelAnimationFrame(raf);raf=0;}
+  else{recovering=true;resumeShield.classList.add('on');setTimeout(ensureLive,60);}
+});
+window.addEventListener('pageshow',()=>{recovering=true;resumeShield.classList.add('on');setTimeout(ensureLive,60)});
+window.addEventListener('focus',()=>{recovering=true;resumeShield.classList.add('on');setTimeout(ensureLive,60)});
+
+function point(e){const r=canvas.getBoundingClientRect();return{x:Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)),y:1-Math.max(0,Math.min(1,(e.clientY-r.top)/r.height))}}
+frame.addEventListener('pointerdown',e=>{if(e.target===state||frame.classList.contains('is-seen'))return;e.preventDefault();try{frame.setPointerCapture(e.pointerId)}catch(_){}const p=point(e);dragStartX=p.x;dragStartY=p.y;startTargetX=targetX;startTargetY=targetY});
+frame.addEventListener('pointermove',e=>{if(frame.classList.contains('is-seen')||!frame.hasPointerCapture(e.pointerId))return;const p=point(e);targetX=Math.max(0,Math.min(1,startTargetX+(p.x-dragStartX)));targetY=Math.max(0,Math.min(1,startTargetY+(p.y-dragStartY)))});
+frame.addEventListener('pointerup',e=>{try{frame.releasePointerCapture(e.pointerId)}catch(_){}});
+frame.addEventListener('pointercancel',e=>{try{frame.releasePointerCapture(e.pointerId)}catch(_){}});
+function orient(e){if(e.gamma==null||e.beta==null)return;targetX=Math.max(0,Math.min(1,(e.gamma+35)/70));targetY=Math.max(0,Math.min(1,(e.beta-10)/70))}
+window.addEventListener('deviceorientation',orient,true);
+if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'){
+ frame.addEventListener('click',()=>DeviceOrientationEvent.requestPermission().catch(()=>{}),{once:true});
+}
+
+build();startLoop();
+})();
+</script>
+<style>
+#tokenNav{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:9999;display:flex;gap:5px;padding:5px;border-radius:10px;background:#000b}
+#tokenNav button{border:0;border-radius:7px;padding:7px 9px;background:#ffffff22;color:#fff;font:600 10px system-ui}
+#tokenNav button.on{background:#ffe600;color:#000}
+</style>
+<div id="tokenNav"><button data-n="1">#0001</button><button data-n="2">#0002</button><button data-n="3">#0003</button></div>
+<script>
+(function(){
+  const buttons=[...document.querySelectorAll("#tokenNav button")];
+
+  function selectToken(n){
+    const pair=window.TOKENS[n];
+    if(!pair)return;
+
+    window.UNSEEN_TOKEN_ID=n;
+
+    // Swap the clean SEEN artwork.
+    document.querySelector("img.original").src=pair.seen;
+
+    // Keep the hidden source in sync, then upload the new UNSEEN artwork
+    // directly into the already-running v14 WebGL texture.
+    document.getElementById("unseenSource").src=pair.unseen;
+    if(window.__setUnseenTexture) window.__setUnseenTexture(pair.unseen);
+
+    document.title="UNSEEN #"+String(n).padStart(4,"0")+" — Hologram Test";
+    buttons.forEach(b=>b.classList.toggle("on",+b.dataset.n===n));
+  }
+
+  buttons.forEach(b=>{
+    b.onclick=()=>selectToken(+b.dataset.n);
+  });
+
+  buttons.forEach(b=>b.classList.toggle("on",+b.dataset.n===window.UNSEEN_TOKEN_ID));
+})();
+</script>
+</body></html>
