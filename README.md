@@ -1,17 +1,30 @@
-# Isolated protected viewer test
+# Ownership handover checkpoint — 8 October 2026
 
-This branch deploys to its own Railway project, service, domain and persistent volume. It shares no runtime, login, database, storage, environment variables or deployment with We Are the Unseen. No domain purchase is needed. The source lives on a dedicated branch of the separate hologram-test repository, not the main website repository.
+## Status
+23 local model checks passed. This is NOT Zcash ownership verification, NOT a wallet integration, and NOT deployed. The approved hosted hologram viewer remains unchanged. Run `node test.mjs` using Node with Ed25519 support.
 
-This is a two-asset feasibility test, not a production marketplace or real NFT wallet system. Asset 1 is the already-public Unseen sample with the approved detailed 640px/81-frame hologram for visual and save-menu testing. It does not prove secrecy of the sample, which exists publicly elsewhere. Asset 2 is a fresh random PNG generated on the private volume at first boot; its public cover contains none of its pixels. It is the access-test fixture.
+The test generates two ephemeral Ed25519 identities, signs application-specific nonce challenges and uses a deliberately simulated ownership authority. No real keys, funds, NFTs or transfers are involved. The authority supplies current owner and ownership revision; neither exists as a public owner lookup for a shielded asset in this implementation. The proof-to-authority mapping is the unresolved integration task.
 
-Only explicitly allowlisted HTML, JS and CSS routes are public. Originals are accessed through permission-checked endpoints. Knowing a private route is insufficient in UNSEEN mode. Public SEEN/BOTH deliberately permit original downloads. The owner session permits a private view after collection unlock. The /api/visitor routes ignore any owner session and use public permissions only. A separate browser without the owner cookie provides the independent visitor test.
+## What was checked
+Current holder access; outsider denial; asset scoping; forged sessions; wrong-key signatures; single-use and expiring challenges; public reveal; transfer revocation of existing sessions and outstanding challenges; new holder access; outage/stale/uncertain-state denial; return transfer not reviving old sessions; logout and expiry.
 
-The one isolated test account also operates the project lock for convenience. Production owner and administrator authority must be separate. TEST_OWNER_HASH is the SHA256 of a cryptographically random test access code. It is not a website password. Login receives the code in a POST body; optional #owner links are removed from browser history before login. The plaintext code is never committed. Sessions are random, server-stored and sent in Secure HttpOnly SameSite=Strict host-only cookies; they expire after 12 hours. Mutations require the configured exact Origin and a session CSRF token.
+Proposed transfer policy: each ownership change resets public reveal to off. This is a design default for review, not yet a user-approved production rule. Already downloaded images remain with their recipients. Revocation governs new requests after the verifier recognizes the transfer, not already delivered bytes or in-flight responses. A real integration needs explicit finality, freshness and maximum revocation delay rules.
 
-SQLite and the fresh fixture reside on /data, outside the public file map. Modes, sessions and collection lock persist there. Original and UI responses use no-store headers. The UI fetches originals as blobs only when allowed, revokes its displayed blob on transitions/hiding, and rechecks state on return and periodically. This cannot revoke bytes already received by an authorised viewer or erase screenshots/downloads.
+## What this model does not prove
+No Zcash proof generation or verification; no actual NFT uniqueness/provenance verification; no real on-chain transfers; no reorg integration; no browser wallet compatibility; no persistent session/challenge storage; no HTTP/CSRF/rate-limit wrapper; no multi-process race/transaction treatment; no production key management. The model's synchronous authority is artificial. Its ten-second freshness and five-minute sessions are laboratory parameters, not researched production guarantees. Map storage is unbounded and unsuitable for a public endpoint.
 
-Required env: PUBLIC_ORIGIN, TEST_OWNER_HASH, DATA_DIR=/data, PORT=3000. LOCAL_TEST=1 is only for loopback tests and must never be enabled on the hosted service. Docker uses Node 24 and an explicit file copy list. No dependencies or public static-directory middleware are used.
+## Research checkpoint
+Primary sources reviewed on 8 October 2026:
+- https://github.com/cachet-zec/cachet — issuance and verifiable registry on the ZSA testnet; describes shielded balances/transfers. Does not establish a ready-made compatible ownership-login interface for this viewer.
+- https://zips.z.cash/zip-0226 — shielded asset transfer/burn protocol and nullifiers. Protocol support alone is not an application ownership proof.
+- https://zips.z.cash/zip-0227 — issuance protocol.
+- https://github.com/ZcashCommunityGrants/zcashcommunitygrants/issues/409 — ZecBit grant proposal; candidate tooling to evaluate, not proof its proposed integration is deployed or audited.
 
-Run `node test.mjs` for the local integration checks. Hosted route tests are executed separately and recorded in the handover. Browser/phone behaviour, additional devices, failover/backups, service-worker/CDN behaviour and third-party marketplace compatibility still need verification. No real chain, wallet, ownership transfer or final production security review is implemented.
+Next real integration gate: identify a specific NFT representation and compatible wallet, then demonstrate a proof that is bound to the asset, challenge, application and current unspent ownership. Check its disclosure to the verifier, and how transfers outside our marketplace revoke old access. Ordinary wallet signatures only establish control of a key and must not be labelled ownership proof. Do not request spending keys or seed phrases, or publish a plaintext original/traits bundle in metadata.
 
-Accepted requirement: keep the detailed hologram; deliberate reconstruction from its permitted public views is an accepted limitation. Prevent direct unauthorised retrieval of the clean original. Do not present normal Save as producing the grey reconstruction diagnostic.
+Acceptance sequence for an actual testnet adapter: issue one unique test asset, obtain owner A's proof without private spending keys leaving the wallet, authorize A, deny B, transfer to B using the chain, deny A's existing session and old proof after the chosen finality boundary, authorize B, repeat on verifier outage and chain uncertainty. Record measured revocation delay and privacy disclosures. Only then connect the adapter to a separately hosted test viewer.
+
+## User testing already completed on existing hosted viewer
+User confirmed Android hologram-only save; private owner original with public UNSEEN; public reveal and saving full yellow original; reverting to UNSEEN and HTTP 403; separate signed-out desktop private window HTTP 403 and hologram-only right-click save. These establish tested viewer behaviour, not cryptographic NFT ownership. The UI dropdown reset bug was fixed in commit b4d524800d9fc683ff456d9f8f60f95fecfbdd25.
+
+The intended marketplace UI is one reveal-permission on/off switch plus a separate private owner view. The current diagnostic page is only for testing. Everything remains separate from the We Are the Unseen website.

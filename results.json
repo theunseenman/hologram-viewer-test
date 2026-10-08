@@ -1,0 +1,98 @@
+{
+  "scope": "LOCAL SIMULATION: real Ed25519 signatures; fake ownership ledger; no Zcash wallet, proof, chain transfer or hosted integration",
+  "passed": 23,
+  "results": [
+    {
+      "name": "Current owner can request original",
+      "passed": true
+    },
+    {
+      "name": "Visitor cannot request unrevealed original",
+      "passed": true
+    },
+    {
+      "name": "Non-owner cannot establish asset session",
+      "passed": true
+    },
+    {
+      "name": "Session cannot access another asset",
+      "passed": true
+    },
+    {
+      "name": "Forged session denied",
+      "passed": true
+    },
+    {
+      "name": "Wrong signing key rejected",
+      "passed": true
+    },
+    {
+      "name": "Challenge replay rejected",
+      "passed": true
+    },
+    {
+      "name": "Expired challenge rejected",
+      "passed": true
+    },
+    {
+      "name": "Owner can enable public reveal",
+      "passed": true
+    },
+    {
+      "name": "Transfer resets public reveal for new ownership revision",
+      "passed": true
+    },
+    {
+      "name": "Former owner existing session denied after transfer",
+      "passed": true
+    },
+    {
+      "name": "Former owner cannot change reveal",
+      "passed": true
+    },
+    {
+      "name": "Pre-transfer signed challenge rejected",
+      "passed": true
+    },
+    {
+      "name": "New owner gets private original access",
+      "passed": true
+    },
+    {
+      "name": "New owner controls public reveal",
+      "passed": true
+    },
+    {
+      "name": "Verifier outage blocks private access",
+      "passed": true
+    },
+    {
+      "name": "Verifier outage blocks permission mutation",
+      "passed": true
+    },
+    {
+      "name": "Stale ownership data denied",
+      "passed": true
+    },
+    {
+      "name": "Uncertain chain state denied",
+      "passed": true
+    },
+    {
+      "name": "Return transfer does not revive old session",
+      "passed": true
+    },
+    {
+      "name": "Fresh proof after return transfer accepted",
+      "passed": true
+    },
+    {
+      "name": "Logout invalidates session",
+      "passed": true
+    },
+    {
+      "name": "Session expiry enforced",
+      "passed": true
+    }
+  ]
+}
