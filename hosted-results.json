@@ -1,0 +1,147 @@
+{
+  "checks": [
+    {
+      "test": "Hosted health",
+      "status": 200
+    },
+    {
+      "test": "UNSEEN denies anonymous fixture",
+      "status": 403
+    },
+    {
+      "test": "No public alternate route /private-fixture.png",
+      "status": 404
+    },
+    {
+      "test": "No public alternate route /data/private-fixture.png",
+      "status": 404
+    },
+    {
+      "test": "No public alternate route /state.sqlite",
+      "status": 404
+    },
+    {
+      "test": "No public alternate route /sample-public.b64",
+      "status": 404
+    },
+    {
+      "test": "No public alternate route /server.mjs",
+      "status": 404
+    },
+    {
+      "test": "No public alternate route /assets/a3.jpg",
+      "status": 404
+    },
+    {
+      "test": "No public alternate route /api/assets/9/original",
+      "status": 404
+    },
+    {
+      "test": "No public alternate route /api/assets/2/original?download=1",
+      "status": 404
+    },
+    {
+      "test": "Forged session denied",
+      "status": 403
+    },
+    {
+      "test": "Range denied",
+      "status": 403
+    },
+    {
+      "test": "HEAD denied",
+      "status": 403
+    },
+    {
+      "test": "Owner login",
+      "status": 200
+    },
+    {
+      "test": "Owner session established",
+      "status": 200
+    },
+    {
+      "test": "Visitor route ignores owner cookie",
+      "status": 403
+    },
+    {
+      "test": "Owner private original",
+      "status": 200
+    },
+    {
+      "test": "Owner read does not publish",
+      "status": 403
+    },
+    {
+      "test": "Cross-origin mutation denied",
+      "status": 403
+    },
+    {
+      "test": "Missing CSRF mutation denied",
+      "status": 403
+    },
+    {
+      "test": "Owner enables SEEN",
+      "status": 200
+    },
+    {
+      "test": "Public exact original in SEEN",
+      "status": 200
+    },
+    {
+      "test": "Restore UNSEEN",
+      "status": 200
+    },
+    {
+      "test": "Original denied after hide",
+      "status": 403
+    },
+    {
+      "test": "Cache headers cannot bypass hide",
+      "status": 403
+    },
+    {
+      "test": "Enable BOTH",
+      "status": 200
+    },
+    {
+      "test": "Public original in BOTH",
+      "status": 200
+    },
+    {
+      "test": "Lock collection",
+      "status": 200
+    },
+    {
+      "test": "Mint lock blocks owner original",
+      "status": 403
+    },
+    {
+      "test": "Mint lock blocks reveal changes",
+      "status": 403
+    },
+    {
+      "test": "Hosted owner session and mint lock persist across redeploy",
+      "status": 200
+    },
+    {
+      "test": "Hosted owner still denied while persistent mint lock active",
+      "status": 403
+    },
+    {
+      "test": "Hosted BOTH mode and exact private fixture persist across redeploy",
+      "status": 200
+    },
+    {
+      "test": "Hosted original denied after restoring UNSEEN following redeploy",
+      "status": 403
+    },
+    {
+      "test": "Hosted logged-out session denied original access",
+      "status": 403
+    }
+  ],
+  "passed": 35,
+  "restart_pending": false,
+  "final_state": "Both assets UNSEEN; collection unlocked; automated test session logged out."
+}
