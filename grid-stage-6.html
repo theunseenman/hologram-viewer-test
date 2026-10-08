@@ -1,0 +1,337 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>The Unseen · Grid test</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#080909;color:#eee;font-family:Arial,sans-serif;padding:24px 14px 48px}.page{max-width:1120px;margin:auto}header{max-width:740px;margin-bottom:24px}.eyebrow{color:#ffe900;font-size:11px;letter-spacing:.14em}h1{font-size:clamp(25px,5vw,40px);margin:12px 0}header p{color:#aaa;line-height:1.6;font-size:14px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}article{min-width:0;border:1px solid #303232;border-radius:12px;overflow:hidden;background:#111313}.frame{position:relative;aspect-ratio:1;background:#030404;overflow:hidden;touch-action:pan-y}.frame.interactive{touch-action:none;box-shadow:inset 0 0 0 2px #ffe900}.frame:after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;box-shadow:inset 0 0 0 1px #ffffff08,inset 0 -60px 100px #0005}canvas,.original{position:absolute;inset:0;width:100%;height:100%;display:block}.original{object-fit:cover;z-index:3;opacity:0;transition:opacity .52s ease}.frame.is-seen .original{opacity:1}.shield{position:absolute;inset:0;z-index:4;background:#000;opacity:0;pointer-events:none;transition:opacity .08s linear}.shield.on{opacity:1}.frame.is-seen .shield{opacity:0}.state{position:absolute;right:8px;top:8px;z-index:7;background:#070808dc;color:#fff;border:1px solid #777;border-radius:30px;padding:8px;font:700 9px Arial;letter-spacing:.08em;touch-action:manipulation}.state:before{content:"";display:inline-block;width:5px;height:5px;margin-right:5px;border-radius:50%;background:#ffe900}.frame.is-seen .state{background:#ffe900;color:#080808}.details{padding:12px}.details h2{font-size:14px;margin:0 0 6px}.note,.status,.cue{font-size:11px;line-height:1.45;color:#999}.note{margin:0 0 10px}.status{min-height:32px;margin:10px 0 0}.cue{margin:8px 0;min-height:30px}.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}button,a{cursor:pointer}button:focus-visible,a:focus-visible{outline:2px solid white;outline-offset:3px}.interact,.retry{background:#202424;border:1px solid #666;border-radius:7px;color:#eee;padding:10px;font:600 12px Arial}.interact[aria-pressed="true"]{background:#ffe900;color:#080808;border-color:#ffe900}.open{color:#ddd;font-size:12px;padding:8px 0}.retry[hidden]{display:none}footer{color:#999;font-size:12px;line-height:1.6;margin-top:24px}@media(min-width:850px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.details{padding:16px}}@media(max-width:350px){.grid{grid-template-columns:1fr}}
+</style></head><body><main class="page"><header><div class="eyebrow">THE UNSEEN · STAGE 6</div><h1>Hologram grid test</h1><p>Scroll through the cards. Tap <b>Interact</b> to drag or tilt one hologram, then <b>Done</b> to scroll over that card again. SEEN shows its original artwork.</p><p>Three approved samples, repeated once to test six cards. This is a viewer test, with no listings or trading.</p></header><section class="grid" aria-label="Hologram samples"><article data-unseen="/assets/a4.png"><div class="frame"><canvas aria-label="Interactive hologram sample 1"></canvas><img class="original" loading="lazy" alt="Sample 1 original artwork" src="/assets/a3.jpg"><div class="shield" aria-hidden="true"></div><button class="state" aria-label="Switch sample 1 to seen artwork">UNSEEN</button></div><div class="details"><h2>Sample 1</h2><p class="note">The Unseen · test artwork</p><div class="actions"><button class="interact" aria-pressed="false">Interact</button><a class="open" href="multi-artwork-stage-5.html?token=1">Open large</a></div><p class="cue">UNSEEN · TAP INTERACT TO MOVE LIGHT</p><p class="status" role="status">Waiting until visible…</p><button class="retry" hidden>Retry hologram</button></div></article>
+<article data-unseen="/assets/a6.png"><div class="frame"><canvas aria-label="Interactive hologram sample 2"></canvas><img class="original" loading="lazy" alt="Sample 2 original artwork" src="/assets/a5.jpg"><div class="shield" aria-hidden="true"></div><button class="state" aria-label="Switch sample 2 to seen artwork">UNSEEN</button></div><div class="details"><h2>Sample 2</h2><p class="note">The Unseen · test artwork</p><div class="actions"><button class="interact" aria-pressed="false">Interact</button><a class="open" href="multi-artwork-stage-5.html?token=2">Open large</a></div><p class="cue">UNSEEN · TAP INTERACT TO MOVE LIGHT</p><p class="status" role="status">Waiting until visible…</p><button class="retry" hidden>Retry hologram</button></div></article>
+<article data-unseen="/assets/a8.png"><div class="frame"><canvas aria-label="Interactive hologram sample 3"></canvas><img class="original" loading="lazy" alt="Sample 3 original artwork" src="/assets/a7.jpg"><div class="shield" aria-hidden="true"></div><button class="state" aria-label="Switch sample 3 to seen artwork">UNSEEN</button></div><div class="details"><h2>Sample 3</h2><p class="note">The Unseen · test artwork</p><div class="actions"><button class="interact" aria-pressed="false">Interact</button><a class="open" href="multi-artwork-stage-5.html?token=3">Open large</a></div><p class="cue">UNSEEN · TAP INTERACT TO MOVE LIGHT</p><p class="status" role="status">Waiting until visible…</p><button class="retry" hidden>Retry hologram</button></div></article>
+<article data-unseen="/assets/a4.png"><div class="frame"><canvas aria-label="Interactive hologram sample 1"></canvas><img class="original" loading="lazy" alt="Sample 1 original artwork" src="/assets/a3.jpg"><div class="shield" aria-hidden="true"></div><button class="state" aria-label="Switch sample 1 to seen artwork">UNSEEN</button></div><div class="details"><h2>Sample 1</h2><p class="note">Repeat · scrolling test</p><div class="actions"><button class="interact" aria-pressed="false">Interact</button><a class="open" href="multi-artwork-stage-5.html?token=1">Open large</a></div><p class="cue">UNSEEN · TAP INTERACT TO MOVE LIGHT</p><p class="status" role="status">Waiting until visible…</p><button class="retry" hidden>Retry hologram</button></div></article>
+<article data-unseen="/assets/a6.png"><div class="frame"><canvas aria-label="Interactive hologram sample 2"></canvas><img class="original" loading="lazy" alt="Sample 2 original artwork" src="/assets/a5.jpg"><div class="shield" aria-hidden="true"></div><button class="state" aria-label="Switch sample 2 to seen artwork">UNSEEN</button></div><div class="details"><h2>Sample 2</h2><p class="note">Repeat · scrolling test</p><div class="actions"><button class="interact" aria-pressed="false">Interact</button><a class="open" href="multi-artwork-stage-5.html?token=2">Open large</a></div><p class="cue">UNSEEN · TAP INTERACT TO MOVE LIGHT</p><p class="status" role="status">Waiting until visible…</p><button class="retry" hidden>Retry hologram</button></div></article>
+<article data-unseen="/assets/a8.png"><div class="frame"><canvas aria-label="Interactive hologram sample 3"></canvas><img class="original" loading="lazy" alt="Sample 3 original artwork" src="/assets/a7.jpg"><div class="shield" aria-hidden="true"></div><button class="state" aria-label="Switch sample 3 to seen artwork">UNSEEN</button></div><div class="details"><h2>Sample 3</h2><p class="note">Repeat · scrolling test</p><div class="actions"><button class="interact" aria-pressed="false">Interact</button><a class="open" href="multi-artwork-stage-5.html?token=3">Open large</a></div><p class="cue">UNSEEN · TAP INTERACT TO MOVE LIGHT</p><p class="status" role="status">Waiting until visible…</p><button class="retry" hidden>Retry hologram</button></div></article></section><footer>Approved smooth-glass effect. Offscreen cards pause; only your selected card responds to dragging and tilt.</footer></main><script>'use strict';
+const vs='attribute vec2 p;varying vec2 uv;void main(){uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
+const fs=`precision highp float;
+varying vec2 uv;uniform vec2 m;uniform float t;uniform float refinement;uniform float surfaceDetail;uniform sampler2D tex;
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+// A neutral-tone height hint from flat art, not a geometric normal map.
+// Minimum RGB suppresses saturated yellow edges so they do not dominate relief.
+float heightHint(vec2 p){
+ vec3 c=texture2D(tex,clamp(p,vec2(0.),vec2(1.))).rgb;
+ return min(c.r,min(c.g,c.b));
+}
+void main(){
+ vec2 tuv=vec2(uv.x,1.-uv.y); vec4 im=texture2D(tex,tuv);
+ float lum=dot(im.rgb,vec3(.299,.587,.114));
+ float chroma=max(im.r,max(im.g,im.b))-min(im.r,min(im.g,im.b));
+ float yellow=smoothstep(.16,.48,im.r-im.b)*smoothstep(.18,.55,im.g-im.b);
+ float dark=smoothstep(.48,.04,lum);
+ float artMask=clamp(dark*.82+yellow+chroma*.45,0.,1.)*im.a;
+
+ /* Three reflections travelling on different axes. */
+ vec2 d1=normalize(vec2(.90,.34));
+ vec2 d2=normalize(vec2(-.48,.88));
+ vec2 d3=normalize(vec2(.22,.98));
+ float a1=dot(uv,d1), a2=dot(uv,d2), a3=dot(uv,d3);
+ float l1=dot(m,d1), l2=dot(m,d2), l3=dot(m,d3);
+ /* Slightly offset each directional catch so they no longer all cross exactly under the fingertip. */
+ float b1=exp(-pow(a1-(l1-.030),2.)/.010);
+ float b2=exp(-pow(a2-(l2+.036),2.)/.0065);
+ float b3=exp(-pow(a3-(l3-.018),2.)/.0048);
+ float c1=exp(-pow(a1-(l1-.030),2.)/.0016);
+ float c2=exp(-pow(a2-(l2+.036),2.)/.00115);
+ float c3=exp(-pow(a3-(l3-.018),2.)/.00085);
+ float reveal=clamp(b1*.72+b2*.48+b3*.36,0.,1.)*artMask;
+
+ vec3 original=im.rgb;
+ vec3 blackLift=mix(vec3(.006),vec3(.115),dark);
+ vec3 baseArt=mix(original,blackLift,dark*.30);
+ vec3 col=vec3(.005,.006,.005);
+ col+=baseArt*reveal*(.78+.24*(b1+b2+b3));
+
+ // Bend only the fine foil and its colour phase. Artwork and reveal footprint stay fixed.
+ vec2 foilUV=uv;
+ if(surfaceDetail>.5){
+  float gx=0.,gy=0.;
+  if(surfaceDetail>1.5){
+   // A wider, weighted neighborhood smooths the height gradient only.
+   // The full-resolution artwork texture and foil brightness remain unchanged.
+   float r=.006;
+   float left=heightHint(tuv+vec2(-r,0.));
+   float right=heightHint(tuv+vec2(r,0.));
+   float top=heightHint(tuv+vec2(0.,-r));
+   float bottom=heightHint(tuv+vec2(0.,r));
+   float tl=heightHint(tuv+vec2(-r,-r));
+   float tr=heightHint(tuv+vec2(r,-r));
+   float bl=heightHint(tuv+vec2(-r,r));
+   float br=heightHint(tuv+vec2(r,r));
+   // Normalize for the wider sample spacing to retain broad surface slopes.
+   gx=((tr+2.*right+br)-(tl+2.*left+bl))*.25*(.004/r);
+   gy=((bl+2.*bottom+br)-(tl+2.*top+tr))*.25*(.004/r);
+  }else{
+   float stepSize=.004;
+   gx=heightHint(tuv+vec2(stepSize,0.))-heightHint(tuv-vec2(stepSize,0.));
+   gy=heightHint(tuv+vec2(0.,stepSize))-heightHint(tuv-vec2(0.,stepSize));
+  }
+  vec2 slope=vec2(gx,-gy);
+  vec2 bend=slope*(.012/(.08+length(slope)));
+  foilUV+=bend;
+ }
+ float f1=dot(foilUV,d1),f2=dot(foilUV,d2),f3=dot(foilUV,d3);
+ /* Stronger coloured foil lines, not a coloured wash. */
+ float p1=(f1*10.5 + m.x*.72-m.y*.31)*6.28318;
+ float p2=(f2*12.5 - m.x*.34+m.y*.66)*6.28318;
+ float p3=(f3*15.0 + m.x*.43+m.y*.25)*6.28318;
+ vec3 sp1=.5+.5*cos(p1+vec3(0.,2.094,4.188));
+ vec3 sp2=.5+.5*cos(p2+vec3(4.188,0.,2.094));
+ vec3 sp3=.5+.5*cos(p3+vec3(2.094,4.188,0.));
+ float fine1=pow(.5+.5*sin(f1*150.+m.x*27.),13.);
+ float fine2=pow(.5+.5*sin(f2*132.-m.y*23.),14.);
+ float fine3=pow(.5+.5*sin(f3*178.+(m.x-m.y)*19.),15.);
+ // The comparison changes only the foil treatment, with the same source and light position.
+ float core1=mix(c1,pow(c1,1.65),refinement);
+ float core2=mix(c2,pow(c2,1.65),refinement);
+ float core3=mix(c3,pow(c3,1.65),refinement);
+ float overlap=1./(1.+refinement*.55*(c1*c2+c2*c3+c1*c3));
+ vec3 foil1=mix(sp1,mix(vec3(dot(sp1,vec3(.299,.587,.114))),sp1,.82),refinement);
+ vec3 foil2=mix(sp2,mix(vec3(dot(sp2,vec3(.299,.587,.114))),sp2,.82),refinement);
+ vec3 foil3=mix(sp3,mix(vec3(dot(sp3,vec3(.299,.587,.114))),sp3,.82),refinement);
+ col+=foil1*artMask*(fine1*b1*.30+core1*mix(.22,.13,refinement))*overlap;
+ col+=foil2*artMask*(fine2*b2*.27+core2*mix(.19,.11,refinement))*overlap;
+ col+=foil3*artMask*(fine3*b3*.24+core3*mix(.17,.10,refinement))*overlap;
+ // Restrained neutral catches retain the underlying facial and clothing facets.
+ col+=vec3(.88,.93,1.)*artMask*(core1*.060+core2*.045+core3*.035)*refinement*overlap;
+
+ /* Clean silver/gold peak catches. */
+ vec2 specPos=vec2(m.x*.88+.06,m.y*.82+.09);
+ float spec=pow(max(0.,1.-distance(uv,specPos)*2.45),14.)*artMask;
+ col+=vec3(.96,.99,1.)*spec*.34;
+ col+=vec3(1.,.89,0.)*yellow*(mix(c1,core1,refinement)*.22+mix(c2,core2,refinement)*.16+mix(c3,core3,refinement)*.14);
+
+ float spark=step(.9976,hash(floor(uv*vec2(330.,440.))+floor(t*1.4)));
+ col+=(sp1+sp2+sp3)/3.*spark*artMask*max(b1,max(b2,b3))*.13;
+ /* Local hologram pool: preserve the exact v9 foil, but only reveal it near the finger/tilt position. */
+ vec2 delta=uv-m;
+
+ /* Organic local foil catch: same reveal footprint in both comparison modes.
+    The reveal edge is distorted in several directions so it no longer reads as a circular torch. */
+ float ang=atan(delta.y,delta.x);
+ float directional=
+      sin(ang*3.0 + a1*15.0)*.022
+     +sin(ang*5.0 - a2*12.0)*.014
+     +sin(ang*7.0 + a3*9.0)*.009;
+ float anisotropic=length(vec2(delta.x*.88,delta.y*1.08));
+ float reach=.245 + directional
+     + b1*.035
+     + b2*.026
+     + b3*.020;
+ float localPool=1.-smoothstep(reach*.48,reach,anisotropic);
+
+ /* Let individual holographic bands feather a little beyond the main pool. */
+ float lineReach=1.-smoothstep(reach*.72,reach*1.18,anisotropic);
+ float foilEnergy=clamp(b1*.55+b2*.42+b3*.34,0.,1.);
+ localPool=max(localPool,lineReach*foilEnergy*.58);
+
+ /* Soft irregular centre rather than a perfect hotspot. */
+ float centreWarp=anisotropic + sin(ang*4.0+a2*8.0)*.008;
+ float hot=1.-smoothstep(.025,.105,centreWarp);
+ col*=localPool;
+ col+=vec3(.055,.06,.052)*artMask*hot*.16;
+ gl_FragColor=vec4(pow(clamp(col,0.,1.4),vec3(.88)),1.);
+}`;
+
+const controllers=new Map();
+function setupCard(card){
+ const canvas=card.querySelector('canvas'),frame=card.querySelector('.frame'),state=card.querySelector('.state'),cue=card.querySelector('.cue'),resumeShield=card.querySelector('.shield'),interact=card.querySelector('.interact');
+ let inView=typeof IntersectionObserver==='undefined',interactive=false;
+ function setInteraction(value){
+  interactive=value;frame.classList.toggle('interactive',value);interact.setAttribute('aria-pressed',String(value));interact.textContent=value?'Done':'Interact';
+  endDrag();resetOrientation();
+  if(!frame.classList.contains('is-seen'))cue.textContent=value?'DRAG OR TILT · TAP DONE TO SCROLL':'UNSEEN · TAP INTERACT TO MOVE LIGHT';
+ }
+ interact.addEventListener('click',()=>{
+  const next=!interactive;
+  for(const other of controllers.values())other.setInteraction(false);
+  if(next&&frame.classList.contains('is-seen'))state.click();
+  setInteraction(next);
+ });
+state.addEventListener('click',e=>{
+  e.stopPropagation();
+  const seen=frame.classList.toggle('is-seen');
+  state.textContent=seen?'SEEN':'UNSEEN';
+  state.setAttribute('aria-label',seen?'Switch to unseen hologram':'Switch to seen artwork');
+  cue.textContent=seen?'SEEN · ORIGINAL ARTWORK':'UNSEEN · TAP INTERACT TO MOVE LIGHT';
+  endDrag();resetOrientation();
+  if(seen){setInteraction(false);stopLoop();resumeShield.classList.remove('on');}else ensureLive();
+});
+
+let gl=null,prog=null,buf=null,texture=null,ml=null,tl=null,xl=null,raf=0;
+let mx=.5,my=.5,targetX=.5,targetY=.5,dragStartX=.5,dragStartY=.5,startTargetX=.5,startTargetY=.5;
+let dragging=false,activePointer=null,lastGamma=null,lastBeta=null,orientAnchorGamma=null,orientAnchorBeta=null,orientAnchorX=.5,orientAnchorY=.5;
+let lost=false,generation=0,ready=false,failed=false,loading=false,cachedImage=null,imageRequest=null,loadTimer=0,restoreTimer=0;
+let refinement=.45,refinementLocation=null,surfaceDetail=2,surfaceLocation=null;
+const status=card.querySelector('.status'),retry=card.querySelector('.retry');
+function message(text){status.textContent=text;}
+function stopLoop(){if(raf)cancelAnimationFrame(raf);raf=0;}
+function fail(text){
+ failed=true;stopLoop();resumeShield.classList.remove('on');retry.hidden=false;message(text+' · Tap Retry or use SEEN.');
+}
+function shader(type,src){
+ const s=gl.createShader(type);if(!s)throw new Error('shader allocation');
+ gl.shaderSource(s,src);gl.compileShader(s);
+ if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){gl.deleteShader(s);throw new Error('shader compilation');}
+ return s;
+}
+function currentUnseen(){return card.dataset.unseen;}
+function dispose(){
+ if(gl&&!lost){if(texture)gl.deleteTexture(texture);if(buf)gl.deleteBuffer(buf);if(prog)gl.deleteProgram(prog);}
+ texture=null;buf=null;prog=null;ready=false;
+}
+function resize(){
+ if(!gl||lost)return;
+ const r=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2),w=Math.max(1,Math.round(r.width*d)),h=Math.max(1,Math.round(r.height*d));
+ if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}
+ gl.viewport(0,0,canvas.width,canvas.height);
+}
+function uploadCached(){
+ if(!cachedImage||!gl||lost||!texture||failed)return;
+ try{
+  gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);
+  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,cachedImage);
+  if(gl.isContextLost())return;
+  if(gl.getError()!==gl.NO_ERROR)throw new Error('texture upload');
+  ready=true;retry.hidden=true;message('Ready · approved smooth glass');startLoop();
+ }catch(_){fail('The hologram artwork could not be prepared');}
+}
+function loadArtwork(){
+ if(cachedImage){uploadCached();return;}
+ if(loading)return;
+ loading=true;message('Loading hologram artwork…');
+ const request=new Image();imageRequest=request;
+ function finish(){clearTimeout(loadTimer);loadTimer=0;loading=false;imageRequest=null;request.onload=null;request.onerror=null;}
+ request.onload=()=>{
+  if(imageRequest!==request)return;
+  finish();cachedImage=request;uploadCached();
+ };
+ request.onerror=()=>{if(imageRequest!==request)return;finish();fail('The artwork did not load');};
+ loadTimer=setTimeout(()=>{
+  if(imageRequest!==request)return;
+  finish();request.src='';fail('Artwork loading timed out');
+ },15000);
+ request.src=currentUnseen();
+}
+function build(){
+ generation++;ready=false;
+ try{
+  gl=canvas.getContext('webgl',{antialias:true,alpha:false})||canvas.getContext('experimental-webgl');
+  if(!gl)throw new Error('WebGL unavailable');
+  if(gl.isContextLost()){lost=true;return false;}
+  lost=false;dispose();
+  const vertex=shader(gl.VERTEX_SHADER,vs);let fragment;
+  try{fragment=shader(gl.FRAGMENT_SHADER,fs);}catch(error){gl.deleteShader(vertex);throw error;}
+  prog=gl.createProgram();
+  gl.attachShader(prog,vertex);gl.attachShader(prog,fragment);gl.linkProgram(prog);
+  gl.deleteShader(vertex);gl.deleteShader(fragment);
+  if(!gl.getProgramParameter(prog,gl.LINK_STATUS))throw new Error('program link');
+  gl.useProgram(prog);
+  buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
+  const loc=gl.getAttribLocation(prog,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  ml=gl.getUniformLocation(prog,'m');tl=gl.getUniformLocation(prog,'t');xl=gl.getUniformLocation(prog,'tex');
+  refinementLocation=gl.getUniformLocation(prog,'refinement');surfaceLocation=gl.getUniformLocation(prog,'surfaceDetail');
+  texture=gl.createTexture();gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+  gl.uniform1i(xl,0);resize();loadArtwork();return true;
+ }catch(_){dispose();fail('Hologram graphics could not start');return false;}
+}
+function draw(ms){
+ raf=0;
+ if(!inView||document.hidden||frame.classList.contains('is-seen')||lost||failed||!gl||!ready)return;
+ if(gl.isContextLost())return;
+ resize();mx+=(targetX-mx)*.10;my+=(targetY-my)*.10;
+ gl.useProgram(prog);gl.uniform1f(surfaceLocation,surfaceDetail);gl.uniform1f(refinementLocation,refinement);
+ gl.uniform2f(ml,mx,my);gl.uniform1f(tl,ms*.001);gl.drawArrays(gl.TRIANGLES,0,6);
+ resumeShield.classList.remove('on');
+ raf=requestAnimationFrame(draw);
+}
+function startLoop(){
+ if(inView&&!raf&&!document.hidden&&!frame.classList.contains('is-seen')&&!lost&&!failed&&gl&&ready)raf=requestAnimationFrame(draw);
+}
+function ensureLive(){
+ if(!inView||document.hidden||frame.classList.contains('is-seen'))return;
+ if(failed)return;
+ if(lost)return;
+ if(!prog){resumeShield.classList.add('on');build();return;}
+ // Focus/pageshow/visibility can fire together. Reuse the existing texture and loop.
+ if(ready){resize();startLoop();}else if(!loading)loadArtwork();
+}
+function endDrag(){
+ const pointer=activePointer;activePointer=null;dragging=false;
+ orientAnchorX=targetX;orientAnchorY=targetY;orientAnchorGamma=lastGamma;orientAnchorBeta=lastBeta;
+ if(pointer!==null){try{frame.releasePointerCapture(pointer);}catch(_){}}
+}
+function resetOrientation(){orientAnchorGamma=null;orientAnchorBeta=null;}
+function suspend(){endDrag();resetOrientation();stopLoop();}
+retry.addEventListener('click',()=>{
+ if(document.hidden)return;
+ failed=false;retry.hidden=true;
+ if(gl&&gl.isContextLost()){lost=true;fail('Graphics are still recovering; try reopening this page');return;}
+ lost=false;
+ if(prog&&texture){if(cachedImage)uploadCached();else loadArtwork();}
+ else ensureLive();
+});
+canvas.addEventListener('webglcontextlost',e=>{
+ e.preventDefault();lost=true;generation++;ready=false;suspend();
+ if(!frame.classList.contains('is-seen'))resumeShield.classList.add('on');message('Restoring hologram graphics…');
+ clearTimeout(restoreTimer);
+ restoreTimer=setTimeout(()=>{if(lost)fail('Graphics recovery is taking too long');},10000);
+},false);
+canvas.addEventListener('webglcontextrestored',()=>{
+ clearTimeout(restoreTimer);restoreTimer=0;lost=false;failed=false;retry.hidden=true;
+ gl=null;prog=null;buf=null;texture=null;ready=false;
+ resetOrientation();build();
+},false);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)suspend();else{resetOrientation();ensureLive();}});
+window.addEventListener('pagehide',suspend);
+window.addEventListener('pageshow',()=>{resetOrientation();ensureLive();});
+// Browser chrome can steal focus without hiding the page or returning a focus event.
+window.addEventListener('blur',()=>{endDrag();resetOrientation();});
+window.addEventListener('focus',()=>{resetOrientation();ensureLive();});
+function point(e){const r=canvas.getBoundingClientRect();return{x:Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)),y:1-Math.max(0,Math.min(1,(e.clientY-r.top)/r.height))};}
+frame.addEventListener('pointerdown',e=>{
+ if(!interactive||e.target===state||frame.classList.contains('is-seen')||activePointer!==null||e.isPrimary===false||(e.pointerType==='mouse'&&e.button!==0))return;
+ e.preventDefault();activePointer=e.pointerId;dragging=true;
+ try{frame.setPointerCapture(e.pointerId);}catch(_){endDrag();return;}
+ const p=point(e);dragStartX=p.x;dragStartY=p.y;startTargetX=targetX;startTargetY=targetY;
+});
+frame.addEventListener('pointermove',e=>{
+ if(e.pointerId!==activePointer||frame.classList.contains('is-seen'))return;
+ const p=point(e);targetX=Math.max(0,Math.min(1,startTargetX+(p.x-dragStartX)));targetY=Math.max(0,Math.min(1,startTargetY+(p.y-dragStartY)));
+});
+for(const event of ['pointerup','pointercancel','lostpointercapture'])frame.addEventListener(event,e=>{if(e.pointerId===activePointer)endDrag();});
+function orient(e){
+ if(!interactive||!inView||document.hidden||frame.classList.contains('is-seen')||!Number.isFinite(e.gamma)||!Number.isFinite(e.beta))return;
+ lastGamma=e.gamma;lastBeta=e.beta;if(dragging)return;
+ if(orientAnchorGamma==null||orientAnchorBeta==null){orientAnchorGamma=e.gamma;orientAnchorBeta=e.beta;orientAnchorX=targetX;orientAnchorY=targetY;return;}
+ targetX=Math.max(0,Math.min(1,orientAnchorX+(e.gamma-orientAnchorGamma)/70));targetY=Math.max(0,Math.min(1,orientAnchorY+(e.beta-orientAnchorBeta)/70));
+}
+window.addEventListener('deviceorientation',orient,true);
+if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'){
+ interact.addEventListener('click',()=>DeviceOrientationEvent.requestPermission().catch(()=>{}),{once:true});
+}
+const controller={setInteraction,visibility(value){
+ inView=value;
+ if(inView){resetOrientation();ensureLive();}
+ else{setInteraction(false);suspend();}
+}};
+controllers.set(card,controller);
+if(inView)ensureLive();
+
+}
+for(const card of document.querySelectorAll('article'))setupCard(card);
+if(typeof IntersectionObserver!=='undefined'){
+ const observer=new IntersectionObserver(entries=>{
+  for(const entry of entries)controllers.get(entry.target).visibility(entry.isIntersecting&&entry.intersectionRatio>.02);
+ },{threshold:[0,.02]});
+ for(const card of controllers.keys())observer.observe(card);
+}
+</script></body></html>
